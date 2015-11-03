@@ -3,35 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Contact List</title>
+  <link rel="stylesheet" href="styles.css">
   <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha256-obxCG8hWR3FEKvV19p/G6KgEYm1v/u1FnRTS7Bc4Ii8= sha512-8Xs5FuWgtHH1JXye8aQcxVEtLqozJQAu8nhPymuRqeEslT6nJ2OgEYeS3cKiXasOVxYPN80DDoOTKWgOafU1LQ==" crossorigin="anonymous">
 </head>
 <body>
-  Contact List
+  <div class="container">
+    <h1>Contact List</h1>
+    
+    <label for="name">Name: </label>
+    <input type="text" id="name" value='Rachel'>
+    <label for="email">Email: </label>
+    <input type="email" id="email" value='r@codinghouse.co'>
+    <label for="phone">Phone: </label>
+    <input type="number" id="phone" value='6508682625'>
+    <label for="twitter">Twitter: </label>
+    <input type="text" id="twitter" value='@WoodsieWoodsie'>
 
-  <label for="name">Name: </label>
-  <input type="text" class="name">
-  <label for="email">Email: </label>
-  <input type="email" class="email">
-  <label for="phone">Phone: </label>
-  <input type="number" class="phone">
-  <label for="twitter">Twitter: </label>
-  <input type="text" class="twitter">
-
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Twitter</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-    </tbody>
-  </table>
-
-
+    <button class="add"> Add Contact </button>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Twitter</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
