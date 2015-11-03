@@ -5,7 +5,27 @@
   $('.add').click(addContact);
 
   var entries = JSON.parse(localStorage.entries || "[]");
+  redrawList();
+  
+  function redrawList() {
+    $('#contactList').empty();
 
+    var entryElements = entries.map(function(entries) {
+      var $tr = $('<tr>');
+
+      var $nameTd = $('<td>').text(entries.name);
+      var $emailTd = $('<td>').text(entries.email);
+      var $phoneTd = $('<td>').val(entries.phone);
+      var $twitterTd = $('<td>').text(entries.twitter);
+      
+      $tr.append($nameTd, $emailTd, $phoneTd, $twitterTd);
+    
+      return $tr;
+    });
+
+    $('#contactList').append(entryElements);  
+  }
+  
   function addContact() {
 
     var nameInput = document.getElementById('name');
@@ -61,8 +81,8 @@
     console.log($tr);
 
     $('#contactList').append($tr);
-
   }
+
 
   function storeLocal(inputValues) {
     var informationEntry = inputValues;
