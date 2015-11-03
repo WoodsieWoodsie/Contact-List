@@ -15,7 +15,7 @@
 
       var $nameTd = $('<td>').text(entries.name);
       var $emailTd = $('<td>').text(entries.email);
-      var $phoneTd = $('<td>').val(entries.phone);
+      var $phoneTd = $('<td>').text(entries.phone);
       var $twitterTd = $('<td>').text(entries.twitter);
       
       $tr.append($nameTd, $emailTd, $phoneTd, $twitterTd);
