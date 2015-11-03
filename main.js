@@ -3,6 +3,7 @@
 (function(){
 
   $('.add').click(addContact);
+  $('tbody').on('click', '.editContact', saveEdits);
 
   var entries = JSON.parse(localStorage.entries || "[]");
   redrawList();
@@ -13,12 +14,18 @@
     var entryElements = entries.map(function(entries) {
       var $tr = $('<tr>');
 
-      var $nameTd = $('<td>').text(entries.name);
-      var $emailTd = $('<td>').text(entries.email);
-      var $phoneTd = $('<td>').text(entries.phone);
-      var $twitterTd = $('<td>').text(entries.twitter);
+      var $nameTd = $('<td>').text(entries.name).prop('contenteditable', true);
+      var $emailTd = $('<td>').text(entries.email).prop('contenteditable', true);
+      var $phoneTd = $('<td>').text(entries.phone).prop('contenteditable', true);
+      var $twitterTd = $('<td>').text(entries.twitter).prop('contenteditable', true);
       
-      $tr.append($nameTd, $emailTd, $phoneTd, $twitterTd);
+      var $saveTd = $('<td><a href="#">save edits</a></td>');
+      $saveTd.children().addClass('editContact');
+      
+      var $deleteTd = $('<td><a href="#">delete entry</a></td>');
+      $deleteTd.children().addClass('delete');
+      
+      $tr.append($nameTd, $emailTd, $phoneTd, $twitterTd, $saveTd, $deleteTd);
     
       return $tr;
     });
@@ -61,28 +68,32 @@
   function postContact(inputValues) {
     var $tr = $('<tr>');
     
-    var $nameTd = $('<td>').addClass('nameOfContact');
+    var $nameTd = $('<td>').addClass('nameOfContact').prop('contenteditable', true);
     $nameTd.text(inputValues.name);
     console.log('name td:', $nameTd);
 
-    var $emailTd = $('<td>').addClass('emailOfContact');
+    var $emailTd = $('<td>').addClass('emailOfContact').prop('contenteditable', true);
     $emailTd.text(inputValues.email);
     console.log('email td:', $emailTd);  
 
-    var $phoneTd = $('<td>').addClass('phoneOfContact');
+    var $phoneTd = $('<td>').addClass('phoneOfContact').prop('contenteditable', true);
     $phoneTd.text(inputValues.phone);
     console.log('phone td:', $phoneTd); 
 
-    var $twitterTd = $('<td>').addClass('twitterOfContact');
+    var $twitterTd = $('<td>').addClass('twitterOfContact').prop('contenteditable', true);
     $twitterTd.text(inputValues.twitter);
-    console.log('twitter td:', $twitterTd);  
+    console.log('twitter td:', $twitterTd); 
 
-    $tr.append($nameTd, $emailTd, $phoneTd, $twitterTd);      
-    console.log($tr);
+    var $saveTd = $('<td><a href="#">save edits</a></td>')
+    $saveTd.children().addClass('editContact')
+
+    var $deleteTd = $('<td><a href="#">delete entry</a></td>');
+    $deleteTd.children().addClass('delete');
+
+    $tr.append($nameTd, $emailTd, $phoneTd, $twitterTd, $saveTd, $deleteTd);      
 
     $('#contactList').append($tr);
   }
-
 
   function storeLocal(inputValues) {
     var informationEntry = inputValues;
@@ -91,6 +102,18 @@
     localStorage.entries = informationEntryStr;
   }
 
+  function saveEdits() {
+    console.log("saving edits");
+    var $editedName = $('.name');
+    var nameEdits = $editedName.text();
+    entries.splice(0, 1, nameEdits);
+    var userEditsStr = JSON.stringify(entries)
+    localStorage.entries = userEditsStr;
+  }
+
+  function deleteEntry() {
+
+  }
 
 
 
