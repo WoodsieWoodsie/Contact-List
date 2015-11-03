@@ -7,7 +7,7 @@
   var entries = JSON.parse(localStorage.entries || "[]");
 
   function addContact() {
-    
+
     var nameInput = document.getElementById('name');
     var name = nameInput.value;
     console.log('name:', name)
@@ -27,10 +27,49 @@
     var twitter = twitterInput.value;
     console.log('twitter:', twitter);
     twitterInput.value = '';
+
+    var inputValues = {
+      'name': name, 'email': email, 'phone': phone, 'twitter': twitter
+    };
+    
+    console.log('input values:', inputValues);
+
+    storeLocal(inputValues);
+    postContact(inputValues);
   }
 
+  function postContact(inputValues) {
+    var $tr = $('<tr>');
+    
+    var $nameTd = $('<td>').addClass('nameOfContact');
+    $nameTd.text(inputValues.name);
+    console.log('name td:', $nameTd);
 
+    var $emailTd = $('<td>').addClass('emailOfContact');
+    $emailTd.text(inputValues.email);
+    console.log('email td:', $emailTd);  
 
+    var $phoneTd = $('<td>').addClass('phoneOfContact');
+    $phoneTd.text(inputValues.phone);
+    console.log('phone td:', $phoneTd); 
+
+    var $twitterTd = $('<td>').addClass('twitterOfContact');
+    $twitterTd.text(inputValues.twitter);
+    console.log('twitter td:', $twitterTd);  
+
+    $tr.append($nameTd, $emailTd, $phoneTd, $twitterTd);      
+    console.log($tr);
+
+    $('#contactList').append($tr);
+
+  }
+
+  function storeLocal(inputValues) {
+    var informationEntry = inputValues;
+    entries.push(informationEntry);
+    var informationEntryStr = JSON.stringify(entries);
+    localStorage.entries = informationEntryStr;
+  }
 
 
 
